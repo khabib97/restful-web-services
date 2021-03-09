@@ -1,8 +1,9 @@
 package com.old.school.rest.webservices.restfulwebservices.user;
 
 import java.net.URI;
-import java.util.Iterator;
 import java.util.List;
+
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -38,7 +39,7 @@ public class UserResource {
 	// input - details of user
 	// output - created & return created user
 	@PostMapping("/users")
-	public ResponseEntity<Object> createUser(@RequestBody User user) {
+	public ResponseEntity<Object> createUser(@Valid @RequestBody User user) {
 		User savedUser = userDaoService.save(user);
 		
 		// return status of created user
@@ -53,7 +54,7 @@ public class UserResource {
 	}
 	
 	@DeleteMapping(path="/users/{id}")
-	public void deleteUser(@PathVariable  int id) {
+	public void deleteUserById(@PathVariable  int id) {
 		User user = userDaoService.deleteById(id);
 		
 		if(user == null) {
