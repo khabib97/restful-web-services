@@ -5,7 +5,8 @@ import java.util.Date;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
 
-public class User {
+
+public class User {//extends RepresentationModel<User>{
 	private Integer id;
 	@Size(min = 3, message="Name should have at least 3 characters")
 	private String name;
