@@ -24,6 +24,8 @@ public class RestfulWebServicesApplication {
 		return localeResolver;
 	}
 	
+	//for updated local, we do not need this method
+	//we declare it inside application.properties spring.messages.basename=messages   
 	/*@Bean   
 	public ResourceBundleMessageSource messageSource() {
 		ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();

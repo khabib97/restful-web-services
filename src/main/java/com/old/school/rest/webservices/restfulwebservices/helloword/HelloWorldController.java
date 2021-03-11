@@ -19,7 +19,7 @@ public class HelloWorldController {
 	@Autowired
 	private MessageSource messageSource;
 	
-	//GET
+	//GET 
 	//URI - /hello-world
 	//method - "Hello World"
 	//@RequestMapping(method = RequestMethod.GET, path="/hello-world")
@@ -39,6 +39,7 @@ public class HelloWorldController {
 	}
 	
 	@GetMapping(path="/hello-world-internationalized")
+	//for simplification ==> this approach is old
 	//public String helloWorldInternationalized(@RequestHeader(name="Accept-Language",required=false) Locale locale) {
 	//    return messageSource.getMessage("good.morning.message", null,  locale); 
     //}
