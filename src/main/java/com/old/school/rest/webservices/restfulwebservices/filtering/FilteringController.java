@@ -2,6 +2,7 @@ package com.old.school.rest.webservices.restfulwebservices.filtering;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.converter.json.MappingJacksonValue;
@@ -16,7 +17,7 @@ import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
 public class FilteringController {
 
 	@Autowired
-	FilteringController filteringController;
+	FilterUtil filterUtil;
 	
 	@GetMapping("/filtered-user")
 	public User getUser() {
@@ -28,18 +29,6 @@ public class FilteringController {
 		return Arrays.asList(new User("khabib97","1013ssew", "dffwe"),new User("sonet","errsew","tpp")) ;
 	}
 	
-	
-	protected <E> MappingJacksonValue dynamicFilterForUser(E fiterData) {
-		
-		SimpleBeanPropertyFilter filter = SimpleBeanPropertyFilter.filterOutAllExcept("username","token");
-		FilterProvider filters = new SimpleFilterProvider().addFilter("UserFilter", filter);
-		
-		MappingJacksonValue mapping = new MappingJacksonValue(fiterData);
-		mapping.setFilters(filters);
-		return mapping;
-	}
-	
-	
 	@GetMapping("/dynamic-filtered-user")
 	public MappingJacksonValue getDynamicFilteredUser() {
 		UserForDynamicFiltering userForDynamicFiltering =  new UserForDynamicFiltering("khabib97","1013ssew", "dffe");  
@@ -50,7 +39,7 @@ public class FilteringController {
 		
 		MappingJacksonValue mapping = new MappingJacksonValue(userForDynamicFiltering);
 		mapping.setFilters(filters);*/
-		return filteringController.dynamicFilterForUser(userForDynamicFiltering);
+		return filterUtil.dynamicFilter(userForDynamicFiltering, UserForDynamicFiltering.class, Set.of("username","token"));
 	}
 	
 	@GetMapping("/dynamic-filtered-user-list")
@@ -65,7 +54,7 @@ public class FilteringController {
 		MappingJacksonValue mapping = new MappingJacksonValue(list);
 		mapping.setFilters(filters);*/
 		
-		return filteringController.dynamicFilterForUser(list);
+		return filterUtil.dynamicFilter(list, UserForDynamicFiltering.class, Set.of("username"));
 	}
 	
 	
