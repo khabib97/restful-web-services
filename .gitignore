@@ -51,3 +51,6 @@ release.properties
 
 ### Old Copy ###
 pom-old.xml
+
+### H2-Data-File
+/data/
